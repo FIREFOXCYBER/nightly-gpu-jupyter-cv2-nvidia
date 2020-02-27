@@ -18,13 +18,13 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 # replace with other Ubuntu version if desired
 # see: https://hub.docker.com/r/nvidia/opengl/
-COPY --from=nvidia/opengl:1.0-glvnd-runtime-ubuntu18.04 \
+COPY --from=nvidia/opengl:1.0-glvnd-runtime-ubuntu16.04 \
   /usr/local/lib/x86_64-linux-gnu \
   /usr/local/lib/x86_64-linux-gnu
 
 # replace with other Ubuntu version if desired
 # see: https://hub.docker.com/r/nvidia/opengl/
-COPY --from=nvidia/opengl:1.0-glvnd-runtime-ubuntu18.04 \
+COPY --from=nvidia/opengl:1.0-glvnd-runtime-ubuntu16.04 \
   /usr/local/share/glvnd/egl_vendor.d/10_nvidia.json \
   /usr/local/share/glvnd/egl_vendor.d/10_nvidia.json
 
@@ -39,24 +39,6 @@ ENV NVIDIA_VISIBLE_DEVICES \
 ENV NVIDIA_DRIVER_CAPABILITIES \
   ${NVIDIA_DRIVER_CAPABILITIES:+$NVIDIA_DRIVER_CAPABILITIES,}graphics
 
-RUN apt-get update \
-  && apt-get install -y \
-  build-essential \
-  cmake \
-  git \
-  wget \
-  unzip \
-  yasm \
-  pkg-config \
-  libswscale-dev \
-  libtbb2 \
-  libtbb-dev \
-  libjpeg-dev \
-  libpng-dev \
-  libtiff-dev \
-  libavformat-dev \
-  libpq-dev \
-  && rm -rf /var/lib/apt/lists/*
 
 # create and start as LOCAL_USER_ID
 COPY scripts/entrypoint.sh /usr/local/bin/entrypoint.sh
