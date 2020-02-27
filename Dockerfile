@@ -1,5 +1,7 @@
 FROM tensorflow/tensorflow:nightly-gpu-jupyter
+
 FROM jjanzic/docker-python3-opencv
+
 # Imported from Nvidia OPENGL
 # optional, if the default user is not "root", you might need to switch to root here and at the end of the script to the original user again.
 # e.g.
