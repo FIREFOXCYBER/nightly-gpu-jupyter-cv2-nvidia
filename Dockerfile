@@ -46,11 +46,10 @@ RUN apt-get update && apt-get install -y \
   python-dev \ 
   python-opencv \ 
   libopencv-dev \ 
-  libav-tools  \ 
+  ffmpeg  \ 
   libjpeg-dev \ 
   libpng-dev \ 
   libtiff-dev \ 
-  libjasper-dev \ 
   python-numpy \ 
   python-pycurl \ 
   python-opencv
