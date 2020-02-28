@@ -17,13 +17,13 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 # replace with other Ubuntu version if desired
 # see: https://hub.docker.com/r/nvidia/opengl/
-COPY --from=nvidia/opengl:1.0-glvnd-runtime-ubuntu16.04 \
+COPY --from=nvidia/opengl:1.0-glvnd-runtime-ubuntu18.04 \
   /usr/local/lib/x86_64-linux-gnu \
   /usr/local/lib/x86_64-linux-gnu
 
 # replace with other Ubuntu version if desired
 # see: https://hub.docker.com/r/nvidia/opengl/
-COPY --from=nvidia/opengl:1.0-glvnd-runtime-ubuntu16.04 \
+COPY --from=nvidia/opengl:1.0-glvnd-runtime-ubuntu18.04 \
   /usr/local/share/glvnd/egl_vendor.d/10_nvidia.json \
   /usr/local/share/glvnd/egl_vendor.d/10_nvidia.json
 
@@ -39,6 +39,8 @@ ENV NVIDIA_DRIVER_CAPABILITIES \
   ${NVIDIA_DRIVER_CAPABILITIES:+$NVIDIA_DRIVER_CAPABILITIES,}graphics
 
 # CV2
+FROM python:3.7
+
 RUN apt-get update \
   && apt-get install -y \
   build-essential \
@@ -89,6 +91,9 @@ RUN wget https://github.com/opencv/opencv/archive/${OPENCV_VERSION}.zip \
 RUN ln -s \
   /usr/local/python/cv2/python-3.7/cv2.cpython-37m-x86_64-linux-gnu.so \
   /usr/local/lib/python3.7/site-packages/cv2.so
+# END
+
+FROM tensorflow/tensorflow:nightly-gpu-jupyter
 
 # create and start as LOCAL_USER_ID
 COPY scripts/entrypoint.sh /usr/local/bin/entrypoint.sh
