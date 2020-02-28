@@ -41,7 +41,7 @@ ENV NVIDIA_DRIVER_CAPABILITIES \
 # CV2
 WORKDIR /
 
-RUN apt-get update && apt-get install -y \ 
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \ 
   pkg-config \
   python-dev \ 
   python-opencv \ 
