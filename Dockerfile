@@ -38,21 +38,16 @@ ENV NVIDIA_VISIBLE_DEVICES \
 ENV NVIDIA_DRIVER_CAPABILITIES \
   ${NVIDIA_DRIVER_CAPABILITIES:+$NVIDIA_DRIVER_CAPABILITIES,}graphics
 
-# CV2
+# CV2 Dependecies
 WORKDIR /
 
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \ 
-  pkg-config \
-  python-dev \ 
-  python-opencv \ 
-  libopencv-dev \ 
   ffmpeg  \ 
   libjpeg-dev \ 
   libpng-dev \ 
   libtiff-dev \ 
   python-numpy \ 
-  python-pycurl \ 
-  python-opencv
+  python-pycurl 
 
 # create and start as LOCAL_USER_ID
 COPY scripts/entrypoint.sh /usr/local/bin/entrypoint.sh
