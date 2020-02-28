@@ -39,8 +39,6 @@ ENV NVIDIA_DRIVER_CAPABILITIES \
   ${NVIDIA_DRIVER_CAPABILITIES:+$NVIDIA_DRIVER_CAPABILITIES,}graphics
 
 # CV2
-FROM python:3.7
-
 RUN apt-get update \
   && apt-get install -y \
   build-essential \
@@ -63,7 +61,7 @@ RUN apt-get update \
 RUN pip install numpy
 
 WORKDIR /
-ENV OPENCV_VERSION="4.1.0"
+ENV OPENCV_VERSION="4.2.0"
 RUN wget https://github.com/opencv/opencv/archive/${OPENCV_VERSION}.zip \
   && unzip ${OPENCV_VERSION}.zip \
   && mkdir /opencv-${OPENCV_VERSION}/cmake_binary \
@@ -92,8 +90,6 @@ RUN ln -s \
   /usr/local/python/cv2/python-3.7/cv2.cpython-37m-x86_64-linux-gnu.so \
   /usr/local/lib/python3.7/site-packages/cv2.so
 # END
-
-FROM tensorflow/tensorflow:nightly-gpu-jupyter
 
 # create and start as LOCAL_USER_ID
 COPY scripts/entrypoint.sh /usr/local/bin/entrypoint.sh
